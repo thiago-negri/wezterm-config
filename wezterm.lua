@@ -7,8 +7,19 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	config.default_prog = {
 		"C:\\Windows\\System32\\cmd.exe",
 		"/c",
-		"C:\\Program Files\\Git\\bin\\sh.exe",
+		"C:\\msys64\\msys2_shell.cmd",
+		"-defterm",
+		"-here",
+		"-no-start",
+		"-mingw64",
+		"-shell",
+		"fish",
 	}
+	-- config.default_prog = {
+	-- 	"C:\\Windows\\System32\\cmd.exe",
+	-- 	"/c",
+	-- 	"C:\\Program Files\\Git\\bin\\sh.exe",
+	-- }
 end
 
 -- Matching color scheme and font of NVIM
