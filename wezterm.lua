@@ -2,8 +2,9 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
--- Use Git Bash on Windows
+-- Windows specific config
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+	-- Use MSYS2 with Fish on Windows
 	config.default_prog = {
 		"C:\\Windows\\System32\\cmd.exe",
 		"/c",
@@ -15,20 +16,23 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 		"-shell",
 		"fish",
 	}
+
 	-- config.default_prog = {
 	-- 	"C:\\Windows\\System32\\cmd.exe",
 	-- 	"/c",
 	-- 	"C:\\Program Files\\Git\\bin\\sh.exe",
 	-- }
+
+	-- Hide window manager title bar with resize/close buttons
+	-- <Windows>-UP = maximize
+	-- I don't remove on MacOS because I don't know how to maximize it without double-clicking the title :(
+	config.window_decorations = "RESIZE"
 end
 
 -- Matching color scheme and font of NVIM
 config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font("CommitMono Nerd Font")
 config.font_size = 18
-
--- Hide window manager title bar with resize/close buttons
-config.window_decorations = "RESIZE"
 
 -- Use standard tab bar at bottom
 config.use_fancy_tab_bar = false
