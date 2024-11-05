@@ -43,8 +43,8 @@ config.font_size = 18
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 
--- Leader is C-b
-config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 2000 }
+-- Leader is C-a
+config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 }
 
 -- Keybindings
 config.keys = {
