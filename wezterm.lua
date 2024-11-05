@@ -54,6 +54,15 @@ config.keys = {
 	{ key = "k", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Up") },
 	{ key = "l", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Right") },
 
+	-- Resize panes, <>TS
+	{ key = ",", mods = "LEADER", action = wezterm.action.AdjustPaneSize({ "Left", 5 }) },
+	{ key = ".", mods = "LEADER", action = wezterm.action.AdjustPaneSize({ "Right", 5 }) },
+	{ key = "t", mods = "LEADER", action = wezterm.action.AdjustPaneSize({ "Up", 5 }) },
+	{ key = "s", mods = "LEADER", action = wezterm.action.AdjustPaneSize({ "Down", 5 }) },
+
+	-- Maximize a pane, M
+	{ key = "m", mods = "LEADER", action = wezterm.action.TogglePaneZoomState },
+
 	-- Move between tabs, []
 	{ key = "[", mods = "LEADER", action = wezterm.action.ActivateTabRelative(-1) },
 	{ key = "]", mods = "LEADER", action = wezterm.action.ActivateTabRelative(1) },
@@ -70,7 +79,7 @@ config.keys = {
 	{ key = "9", mods = "LEADER", action = wezterm.action.ActivateTab(8) },
 
 	-- New tab
-	{ key = "n", mods = "LEADER", action = wezterm.action.SpawnTab("DefaultDomain") },
+	{ key = "n", mods = "LEADER", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
 
 	-- Split tab
 	{ key = "v", mods = "LEADER", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
@@ -78,6 +87,9 @@ config.keys = {
 
 	-- Close pane
 	{ key = "q", mods = "LEADER", action = wezterm.action.CloseCurrentPane({ confirm = false }) },
+
+	-- Enter VI mode
+	{ key = "'", mods = "LEADER", action = wezterm.action.ActivateCopyMode },
 
 	-- Rename tab
 	{
