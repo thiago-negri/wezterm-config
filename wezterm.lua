@@ -1,5 +1,7 @@
 local wezterm = require("wezterm")
 
+local mux = wezterm.mux
+
 local config = wezterm.config_builder()
 
 -- Windows specific config
@@ -22,12 +24,15 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	-- 	"/c",
 	-- 	"C:\\Program Files\\Git\\bin\\sh.exe",
 	-- }
-
-	-- Hide window manager title bar with resize/close buttons
-	-- <Windows>-UP = maximize
-	-- I don't remove on MacOS because I don't know how to maximize it without double-clicking the title :(
-	config.window_decorations = "RESIZE"
 end
+
+-- Hide window manager title bar with resize/close buttons
+config.window_decorations = "RESIZE"
+-- Maximize on start
+wezterm.on("gui-startup", function(cmd)
+	local _, _, window = mux.spawn_window(cmd or {})
+	window:gui_window():maximize()
+end)
 
 -- Matching color scheme and font of NVIM
 config.color_scheme = "Catppuccin Mocha"
