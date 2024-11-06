@@ -6,9 +6,12 @@ local config = wezterm.config_builder()
 
 local action = wezterm.action
 
+-- Use Fish shell for MacOS and Linux
+config.default_prog = { "/usr/local/bin/fish" }
+
 -- Windows specific config
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-	-- Use MSYS2 with Fish on Windows
+	-- On Windows, cmd -> MSYS2 -> Fish
 	config.default_prog = {
 		"C:\\Windows\\System32\\cmd.exe",
 		"/c",
