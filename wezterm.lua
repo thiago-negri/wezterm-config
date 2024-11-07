@@ -47,7 +47,7 @@ end)
 -- Matching color scheme and font of NVIM
 config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font("CommitMono Nerd Font")
-config.font_size = 18
+config.font_size = 16
 
 -- Use standard tab bar at bottom
 config.use_fancy_tab_bar = false
@@ -67,8 +67,12 @@ config.keys = {
     -- Resize panes, <>TS
     { key = "<", mods = "LEADER", action = action.AdjustPaneSize({ "Left", 5 }) },
     { key = ">", mods = "LEADER", action = action.AdjustPaneSize({ "Right", 5 }) },
-    { key = "t", mods = "LEADER", action = action.AdjustPaneSize({ "Up", 5 }) },
-    { key = "s", mods = "LEADER", action = action.AdjustPaneSize({ "Down", 5 }) },
+    { key = "T", mods = "LEADER", action = action.AdjustPaneSize({ "Up", 5 }) },
+    { key = "S", mods = "LEADER", action = action.AdjustPaneSize({ "Down", 5 }) },
+
+    -- Zoom in/out (change font size), -=
+    { key = "=", mods = "LEADER", action = action.IncreaseFontSize },
+    { key = "-", mods = "LEADER", action = action.DecreaseFontSize },
 
     -- Maximize a pane, M
     { key = "m", mods = "LEADER", action = action.TogglePaneZoomState },
@@ -121,10 +125,7 @@ config.keys = {
         mods = "LEADER",
         action = action.SpawnCommandInNewTab({
             cwd = os.getenv("WEZTERM_CONFIG_DIR"),
-            args = {
-                "nvim",
-                os.getenv("WEZTERM_CONFIG_FILE"),
-            },
+            args = { "nvim", os.getenv("WEZTERM_CONFIG_FILE"), },
         }),
     },
 }
