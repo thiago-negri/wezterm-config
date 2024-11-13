@@ -46,7 +46,14 @@ end)
 -- Matching color scheme and font of NVIM
 -- config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font("CommitMono Nerd Font")
-config.font_size = 14
+
+-- My Windows monitor is way bigger :)
+if isWindows then
+   config.font_size = 14
+else
+   config.font_size = 18
+end
+
 -- Kanagawa
 config.force_reverse_video_cursor = true
 config.colors = {
