@@ -1,8 +1,9 @@
 local wezterm = require("wezterm")
+local sessionizer = require("sessionizer")
 
 local mux = wezterm.mux
 local config = wezterm.config_builder()
-local action = wezterm.action
+local act = wezterm.action
 local isWindows = wezterm.target_triple == "x86_64-pc-windows-msvc"
 
 if isWindows then
@@ -72,8 +73,10 @@ config.colors = {
     scrollbar_thumb = "#16161d",
     split = "#16161d",
 
-    ansi = { "#090618", "#c34043", "#76946a", "#c0a36e", "#7e9cd8", "#957fb8", "#6a9589", "#c8c093" },
-    brights = { "#727169", "#e82424", "#98bb6c", "#e6c384", "#7fb4ca", "#938aa9", "#7aa89f", "#dcd7ba" },
+    ansi = { "#090618", "#c34043", "#76946a", "#c0a36e",
+        "#7e9cd8", "#957fb8", "#6a9589", "#c8c093" },
+    brights = { "#727169", "#e82424", "#98bb6c", "#e6c384",
+        "#7fb4ca", "#938aa9", "#7aa89f", "#dcd7ba" },
     indexed = { [16] = "#ffa066", [17] = "#ff5d62" },
 }
 
@@ -84,76 +87,73 @@ config.tab_bar_at_bottom = true
 -- Leader is C-a
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 }
 
+local leader = "LEADER"
+
 -- Keybindings
 config.keys = {
+    -- Sessionizer / Workspaces
+    { key = "f", mods = leader, action = wezterm.action_callback(sessionizer.toggle) },
+    { key = "w", mods = leader, action = act.SwitchToWorkspace { name = 'default' } },
+    { key = "e", mods = leader, action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
+
     -- Move between panes, HJKL
-    { key = "h", mods = "LEADER", action = action.ActivatePaneDirection("Left") },
-    { key = "j", mods = "LEADER", action = action.ActivatePaneDirection("Down") },
-    { key = "k", mods = "LEADER", action = action.ActivatePaneDirection("Up") },
-    { key = "l", mods = "LEADER", action = action.ActivatePaneDirection("Right") },
+    { key = "h", mods = leader, action = act.ActivatePaneDirection("Left") },
+    { key = "j", mods = leader, action = act.ActivatePaneDirection("Down") },
+    { key = "k", mods = leader, action = act.ActivatePaneDirection("Up") },
+    { key = "l", mods = leader, action = act.ActivatePaneDirection("Right") },
 
     -- Resize panes, <>TS
-    { key = "<", mods = "LEADER", action = action.AdjustPaneSize({ "Left", 5 }) },
-    { key = ">", mods = "LEADER", action = action.AdjustPaneSize({ "Right", 5 }) },
-    { key = "T", mods = "LEADER", action = action.AdjustPaneSize({ "Up", 5 }) },
-    { key = "S", mods = "LEADER", action = action.AdjustPaneSize({ "Down", 5 }) },
+    { key = "<", mods = leader, action = act.AdjustPaneSize({ "Left", 5 }) },
+    { key = ">", mods = leader, action = act.AdjustPaneSize({ "Right", 5 }) },
+    { key = "T", mods = leader, action = act.AdjustPaneSize({ "Up", 5 }) },
+    { key = "S", mods = leader, action = act.AdjustPaneSize({ "Down", 5 }) },
 
     -- Zoom in/out (change font size), -=
-    { key = "=", mods = "LEADER", action = action.IncreaseFontSize },
-    { key = "-", mods = "LEADER", action = action.DecreaseFontSize },
+    { key = "=", mods = leader, action = act.IncreaseFontSize },
+    { key = "-", mods = leader, action = act.DecreaseFontSize },
 
     -- Maximize a pane, M
-    { key = "m", mods = "LEADER", action = action.TogglePaneZoomState },
+    { key = "m", mods = leader, action = act.TogglePaneZoomState },
 
     -- Move between tabs, []
-    { key = "[", mods = "LEADER", action = action.ActivateTabRelative(-1) },
-    { key = "]", mods = "LEADER", action = action.ActivateTabRelative(1) },
+    { key = "[", mods = leader, action = act.ActivateTabRelative(-1) },
+    { key = "]", mods = leader, action = act.ActivateTabRelative(1) },
 
     -- Go to tab, 1 .. 9
-    { key = "1", mods = "LEADER", action = action.ActivateTab(0) },
-    { key = "2", mods = "LEADER", action = action.ActivateTab(1) },
-    { key = "3", mods = "LEADER", action = action.ActivateTab(2) },
-    { key = "4", mods = "LEADER", action = action.ActivateTab(3) },
-    { key = "5", mods = "LEADER", action = action.ActivateTab(4) },
-    { key = "6", mods = "LEADER", action = action.ActivateTab(5) },
-    { key = "7", mods = "LEADER", action = action.ActivateTab(6) },
-    { key = "8", mods = "LEADER", action = action.ActivateTab(7) },
-    { key = "9", mods = "LEADER", action = action.ActivateTab(8) },
+    { key = "1", mods = leader, action = act.ActivateTab(0) },
+    { key = "2", mods = leader, action = act.ActivateTab(1) },
+    { key = "3", mods = leader, action = act.ActivateTab(2) },
+    { key = "4", mods = leader, action = act.ActivateTab(3) },
+    { key = "5", mods = leader, action = act.ActivateTab(4) },
+    { key = "6", mods = leader, action = act.ActivateTab(5) },
+    { key = "7", mods = leader, action = act.ActivateTab(6) },
+    { key = "8", mods = leader, action = act.ActivateTab(7) },
+    { key = "9", mods = leader, action = act.ActivateTab(8) },
 
     -- New tab, N
-    { key = "n", mods = "LEADER", action = action.SpawnTab("CurrentPaneDomain") },
+    { key = "n", mods = leader, action = act.SpawnTab("CurrentPaneDomain") },
 
     -- Split tab, VS
-    { key = "v", mods = "LEADER", action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-    { key = "s", mods = "LEADER", action = action.SplitVertical({ domain = "CurrentPaneDomain" }) },
+    { key = "v", mods = leader, action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+    { key = "s", mods = leader, action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 
     -- Close pane, Q
-    { key = "q", mods = "LEADER", action = action.CloseCurrentPane({ confirm = false }) },
+    { key = "q", mods = leader, action = act.CloseCurrentPane({ confirm = false }) },
 
     -- Enter VI mode, '
-    { key = "'", mods = "LEADER", action = action.ActivateCopyMode },
+    { key = "'", mods = leader, action = act.ActivateCopyMode },
 
     -- Rename tab, R
     {
         key = "r",
-        mods = "LEADER",
-        action = action.PromptInputLine({
+        mods = leader,
+        action = act.PromptInputLine({
             description = "Enter new name for tab",
             action = wezterm.action_callback(function(window, _, line)
                 if line then
                     window:active_tab():set_title(line)
                 end
             end),
-        }),
-    },
-
-    -- Open wezterm config file, ,
-    {
-        key = ",",
-        mods = "LEADER",
-        action = action.SpawnCommandInNewTab({
-            cwd = os.getenv("WEZTERM_CONFIG_DIR"),
-            args = { "nvim", os.getenv("WEZTERM_CONFIG_FILE"), },
         }),
     },
 }
