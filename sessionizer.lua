@@ -1,3 +1,5 @@
+-- Reference: https://github.com/wez/wezterm/discussions/4796
+
 local wezterm = require("wezterm")
 local act = wezterm.action
 
