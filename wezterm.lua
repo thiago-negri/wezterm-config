@@ -35,6 +35,8 @@ wezterm.on("update-right-status", function(window)
     window:set_right_status(window:active_workspace())
 end)
 
+config.max_fps = 200;
+
 -- Hide window manager title bar with resize/close buttons
 config.window_decorations = "RESIZE"
 -- Maximize on start
