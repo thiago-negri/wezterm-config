@@ -23,6 +23,17 @@ local cmd = {
 
 -- macOS:
 if not isWindows then
+  fd = "/usr/local/bin/fd"
+  cmd = {
+    fd,
+    "-HI",
+    "-td",
+    "^.git$",
+    "--max-depth=4",
+    -- macOS search paths:
+    "/Users/thiago.negri/projects/",
+    "/Users/thiago.negri/.config/",
+  }
 end
 
 wezterm.on('update-right-status', function(window, pane)
