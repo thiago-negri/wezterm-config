@@ -7,34 +7,33 @@ local M = {}
 
 local isWindows = wezterm.target_triple == "x86_64-pc-windows-msvc"
 
+local cmd
 -- Windows:
-local fd = "c:\\Users\\Thiago\\AppData\\Local\\Microsoft\\WinGet\\Links\\fd"
-local cmd = {
-  fd,
-  "-HI",
-  "-td", -- Include directories, for standard clones
-  "-tf", -- Include files, for bare clones
-  "^.git$",
-  "--max-depth=4",
-  -- Windows search paths:
-  "c:\\Projetos\\",
-  "c:\\Users\\Thiago\\AppData\\Local\\nvim\\",
-  "c:\\Users\\Thiago\\.config\\",
-}
-
--- macOS:
-if not isWindows then
-  fd = "/usr/local/bin/fd"
+if isWindows then
   cmd = {
-    fd,
-    "-HI",
-    "-td", -- Include directories, for standard clones
-    "-tf", -- Include files, for bare clones
-    "^.git$",
-    "--max-depth=4",
+    "find",
+    -- Windows search paths:
+    "c:\\Projetos",
+    "c:\\Users\\Thiago\\AppData\\Local\\nvim",
+    "c:\\Users\\Thiago\\.config",
+    --
+    "-type", "d",
+    "-maxdepth", "2",
+    "-mindepth", "1",
+    "-name", ".git"
+  }
+else
+  -- macOS:
+  cmd = {
+    "find",
     -- macOS search paths:
-    "/Users/thiago.negri/projects/",
-    "/Users/thiago.negri/.config/",
+    "/Users/thiago.negri/projects",
+    "/Users/thiago.negri/.config",
+    --
+    "-type", "d",
+    "-maxdepth", "2",
+    "-mindepth", "1",
+    "-name", ".git"
   }
 end
 
@@ -55,15 +54,8 @@ M.toggle = function(window, pane)
   for line in stdout:gmatch("([^\n]*)\n?") do
     local project = line:gsub("[\\/].git[\\/]?$", "")
     local label = project
-    local id
-    if line:find("/.git/$") then
-      -- If it's a standard clone
-      id = project:gsub(".*[\\/]", "")
-    else
-      -- If it's a bare clone
-      id = line:gsub(".*[\\/](.*[\\/].*)/.git", "%1")
-    end
-    table.insert(projects, { label = tostring(label), id = tostring(id) })
+    local id = label:gsub(".*[\\/]", "")
+    table.insert(projects, { label = tostring(id), id = tostring(label) })
   end
 
   window:perform_action(
@@ -74,7 +66,7 @@ M.toggle = function(window, pane)
         else
           wezterm.log_info("Selected " .. label)
           win:perform_action(
-            act.SwitchToWorkspace({ name = id, spawn = { cwd = label } }),
+            act.SwitchToWorkspace({ name = label, spawn = { cwd = id } }),
             pane
           )
         end
