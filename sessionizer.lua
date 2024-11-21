@@ -12,7 +12,8 @@ local fd = "c:\\Users\\Thiago\\AppData\\Local\\Microsoft\\WinGet\\Links\\fd"
 local cmd = {
   fd,
   "-HI",
-  "-td",
+  "-td", -- Include directories, for standard clones
+  "-tf", -- Include files, for bare clones
   "^.git$",
   "--max-depth=4",
   -- Windows search paths:
@@ -27,7 +28,8 @@ if not isWindows then
   cmd = {
     fd,
     "-HI",
-    "-td",
+    "-td", -- Include directories, for standard clones
+    "-tf", -- Include files, for bare clones
     "^.git$",
     "--max-depth=4",
     -- macOS search paths:
@@ -51,9 +53,16 @@ M.toggle = function(window, pane)
   end
 
   for line in stdout:gmatch("([^\n]*)\n?") do
-    local project = line:gsub("[\\/].git[\\/]$", "")
+    local project = line:gsub("[\\/].git[\\/]?$", "")
     local label = project
-    local id = project:gsub(".*[\\/]", "")
+    local id
+    if line:find("/.git/$") then
+      -- If it's a standard clone
+      id = project:gsub(".*[\\/]", "")
+    else
+      -- If it's a bare clone
+      id = line:gsub(".*[\\/](.*[\\/].*)/.git", "%1")
+    end
     table.insert(projects, { label = tostring(label), id = tostring(id) })
   end
 
