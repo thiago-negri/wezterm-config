@@ -11,15 +11,15 @@ local cmd
 -- Windows:
 if isWindows then
   cmd = {
-    "find",
+    "C:\\msys64\\usr\\bin\\find",
     -- Windows search paths:
     "c:\\Projetos",
     "c:\\Users\\Thiago\\AppData\\Local\\nvim",
     "c:\\Users\\Thiago\\.config",
     --
-    "-type", "d",
-    "-maxdepth", "2",
+    "-maxdepth", "3",
     "-mindepth", "1",
+    "-type", "d",
     "-name", ".git"
   }
 else
@@ -30,9 +30,9 @@ else
     "/Users/thiago.negri/projects",
     "/Users/thiago.negri/.config",
     --
-    "-type", "d",
     "-maxdepth", "2",
-    "-mindepth", "1",
+    "-mindepth", "0",
+    "-type", "d",
     "-name", ".git"
   }
 end
