@@ -93,7 +93,13 @@ local leader = "LEADER"
 config.keys = {
     -- Sessionizer / Workspaces
     { key = "f", mods = leader, action = wezterm.action_callback(sessionizer.toggle) },
-    { key = "w", mods = leader, action = act.SwitchToWorkspace { name = 'default' } },
+    { key = "q", mods = leader, action = act.SwitchToWorkspace { name = 'default' } },
+    { key = "w", mods = leader, action = wezterm.action_callback(function (win, pane) 
+        win:perform_action(
+            act.SwitchToWorkspace({ name = "projects", spawn = { cwd = "C:\\Projetos" } }),
+            pane
+        )
+    end) },
     { key = "e", mods = leader, action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
 
     -- Move between panes, HJKL
