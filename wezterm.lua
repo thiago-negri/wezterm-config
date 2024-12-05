@@ -36,15 +36,24 @@ wezterm.on("update-right-status", function(window)
     window:set_right_status(window:active_workspace())
 end)
 
-config.max_fps = 200;
+config.max_fps = 200
+config.tab_max_width = 4
+config.show_tab_index_in_tab_bar = true
+config.hide_tab_bar_if_only_one_tab = true
 
 -- Hide window manager title bar with resize/close buttons
 config.window_decorations = "RESIZE"
 -- Maximize on start
 wezterm.on("gui-startup", function(cmd)
     local _, _, window = mux.spawn_window(cmd or {})
-    window:gui_window():maximize()
+    if isWindows then
+        window:gui_window():set_position(500, 10)
+    else
+        window:gui_window():maximize()
+    end
 end)
+config.initial_cols = 125
+config.initial_rows = 57
 
 -- Matching color scheme and font of NVIM
 -- config.color_scheme = "Catppuccin Mocha"
@@ -167,6 +176,12 @@ config.keys = {
     -- Enter VI mode, '
     { key = "'", mods = leader, action = act.ActivateCopyMode },
 
+    -- Toggle window decoration, m
+    { key = "m", mods = leader, action = act.EmitEvent "toggle-window-decoration" },
+
+    -- Toggle font, ;
+    { key = ";", mods = leader, action = act.EmitEvent "toggle-window-font" },
+
     -- Rename tab, R
     {
         key = "r",
@@ -181,5 +196,29 @@ config.keys = {
         }),
     },
 }
+
+wezterm.on('toggle-window-maximize', function(window, pane)
+    window:toggle_fullscreen()
+end)
+
+wezterm.on('toggle-window-font', function(window, pane)
+    local overrides = window:get_config_overrides() or {}
+    if not overrides.font then
+        overrides.font = wezterm.font("CommitMono Nerd Font")
+    else
+        overrides.font = nil
+    end
+    window:set_config_overrides(overrides)
+end)
+
+wezterm.on('toggle-window-decoration', function(window, pane)
+    local overrides = window:get_config_overrides() or {}
+    if not overrides.window_decorations then
+        overrides.window_decorations = "TITLE | RESIZE"
+    else
+        overrides.window_decorations = nil
+    end
+    window:set_config_overrides(overrides)
+end)
 
 return config
