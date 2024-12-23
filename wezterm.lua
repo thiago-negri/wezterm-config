@@ -6,9 +6,10 @@ local config = wezterm.config_builder()
 local act = wezterm.action
 local isWindows = wezterm.target_triple == "x86_64-pc-windows-msvc"
 
+-- Use ZSH
 if isWindows then
     -- Windows specific config
-    -- cmd -> MSYS2 -> Fish
+    -- cmd -> MSYS2 -> ZSH
     config.default_prog = {
         "C:\\Windows\\System32\\cmd.exe",
         "/c",
@@ -18,17 +19,12 @@ if isWindows then
         "-no-start",
         "-mingw64",
         "-shell",
-        "fish",
+        -- "fish",
+        "zsh",
     }
-    -- If you want to use Git Bash
-    -- config.default_prog = {
-    --     "C:\\Windows\\System32\\cmd.exe",
-    --     "/c",
-    --     "C:\\Program Files\\Git\\bin\\sh.exe",
-    -- }
 else
-    -- Use Fish shell for MacOS and Linux
-    config.default_prog = { "/usr/local/bin/fish" }
+    -- config.default_prog = { "/usr/local/bin/fish" }
+    config.default_prog = { "zsh" }
 end
 
 -- Show workspace name at left bottom
@@ -93,18 +89,25 @@ config.force_reverse_video_cursor = true
 -- }
 --
 -- Kanagawa Dragon
+-- config.colors = {
+--     foreground = "#c5c9c5",
+--     background = "#181616",
+--     cursor_bg = "#C8C093",
+--     cursor_fg = "#C8C093",
+--     cursor_border = "#C8C093",
+--     selection_fg = "#C8C093",
+--     selection_bg = "#2D4F67",
+--     scrollbar_thumb = "#16161D",
+--     split = "#16161D",
+--     ansi = { "#0D0C0C", "#C4746E", "#8A9A7B", "#C4B28A", "#8BA4B0", "#A292A3", "#8EA4A2", "#C8C093" },
+--     brights = { "#A6A69C", "#E46876", "#87A987", "#E6C384", "#7FB4CA", "#938AA9", "#7AA89F", "#C5C9C5" },
+-- }
+-- Colors (Simple Dark)
 config.colors = {
-    foreground = "#c5c9c5",
-    background = "#181616",
-    cursor_bg = "#C8C093",
-    cursor_fg = "#C8C093",
-    cursor_border = "#C8C093",
-    selection_fg = "#C8C093",
-    selection_bg = "#2D4F67",
-    scrollbar_thumb = "#16161D",
-    split = "#16161D",
-    ansi = { "#0D0C0C", "#C4746E", "#8A9A7B", "#C4B28A", "#8BA4B0", "#A292A3", "#8EA4A2", "#C8C093" },
-    brights = { "#A6A69C", "#E46876", "#87A987", "#E6C384", "#7FB4CA", "#938AA9", "#7AA89F", "#C5C9C5" },
+   background = '#0a0a0a',
+   foreground = '#B8B9B4',
+   ansi = { '#0A0A0A', '#939490', '#5E6E5C', '#B6B8B3', '#727370', '#D1D1CB', '#636361', '#AAABA6' },
+   brights = { '#2E2E2C', '#989995', '#636361', '#BBBDB8', '#777875', '#D6D6D0', '#696966', '#AFB0AB' }
 }
 
 -- Use standard tab bar at bottom
