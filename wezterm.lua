@@ -73,23 +73,23 @@ config.colors = {
     split = "#333333",
     ansi = {
         '#0A0A0A', -- black
-        '#B39393', -- maroon
+        '#B39393', -- red
         '#93B393', -- green
-        '#93A393', -- olive
-        '#9393B3', -- navy
-        '#9393A3', -- purple
-        '#9393C3', -- teal
-        '#AAAAAA', -- silver
+        '#B3B393', -- yellow
+        '#9393B3', -- blue
+        '#B393B3', -- magenta
+        '#93B3B3', -- cyan
+        '#B3B3B3', -- white
     },
     brights = {
-        '#2E2E2E', -- grey
+        '#0A0A0A', -- black
         '#C39393', -- red
-        '#93C393', -- lime
-        '#B3B393', -- yellow
-        '#B3B3C3', -- blue
-        '#93B3B3', -- fuchsia
-        '#B3C3B3', -- aqua
-        '#CCCCCC', -- white
+        '#93C393', -- green
+        '#C3C393', -- yellow
+        '#9393C3', -- blue
+        '#C393C3', -- magenta
+        '#93C3C3', -- cyan
+        '#C3C3C3', -- white
     },
 }
 
