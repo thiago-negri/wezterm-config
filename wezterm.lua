@@ -68,7 +68,7 @@ config.colors = {
     cursor_fg = "#000000",
     cursor_border = "#bcbcbc",
     selection_fg = "#000000",
-    selection_bg = "#a0a0a0",
+    selection_bg = "#5f5f5f",
     scrollbar_thumb = "#333333",
     split = "#333333",
     ansi = {
@@ -208,3 +208,4 @@ wezterm.on('toggle-window-decoration', function(window, pane)
 end)
 
 return config
+
