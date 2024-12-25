@@ -51,9 +51,6 @@ end)
 config.initial_cols = 125
 config.initial_rows = 57
 
--- Matching color scheme and font of NVIM
--- config.color_scheme = "Catppuccin Mocha"
--- config.font = wezterm.font("CommitMono Nerd Font")
 config.font = wezterm.font("Comic Code")
 
 -- My Windows monitor is way bigger :)
@@ -63,51 +60,37 @@ else
    config.font_size = 18
 end
 
--- Kanagawa
-config.force_reverse_video_cursor = true
---
--- Kanagawa Wave
--- config.colors = {
---     foreground = "#dcd7ba",
---     background = "#1f1f28",
---
---     cursor_bg = "#c8c093",
---     cursor_fg = "#c8c093",
---     cursor_border = "#c8c093",
---
---     selection_fg = "#c8c093",
---     selection_bg = "#2d4f67",
---
---     scrollbar_thumb = "#16161d",
---     split = "#16161d",
---
---     ansi = { "#090618", "#c34043", "#76946a", "#c0a36e",
---         "#7e9cd8", "#957fb8", "#6a9589", "#c8c093" },
---     brights = { "#727169", "#e82424", "#98bb6c", "#e6c384",
---         "#7fb4ca", "#938aa9", "#7aa89f", "#dcd7ba" },
---     indexed = { [16] = "#ffa066", [17] = "#ff5d62" },
--- }
---
--- Kanagawa Dragon
--- config.colors = {
---     foreground = "#c5c9c5",
---     background = "#181616",
---     cursor_bg = "#C8C093",
---     cursor_fg = "#C8C093",
---     cursor_border = "#C8C093",
---     selection_fg = "#C8C093",
---     selection_bg = "#2D4F67",
---     scrollbar_thumb = "#16161D",
---     split = "#16161D",
---     ansi = { "#0D0C0C", "#C4746E", "#8A9A7B", "#C4B28A", "#8BA4B0", "#A292A3", "#8EA4A2", "#C8C093" },
---     brights = { "#A6A69C", "#E46876", "#87A987", "#E6C384", "#7FB4CA", "#938AA9", "#7AA89F", "#C5C9C5" },
--- }
--- Colors (Simple Dark)
+-- Colorscheme
 config.colors = {
-   background = '#0a0a0a',
-   foreground = '#B8B9B4',
-   ansi = { '#0A0A0A', '#939490', '#5E6E5C', '#B6B8B3', '#727370', '#D1D1CB', '#636361', '#AAABA6' },
-   brights = { '#2E2E2C', '#989995', '#636361', '#BBBDB8', '#777875', '#D6D6D0', '#696966', '#AFB0AB' }
+    foreground = "#bcbcbc",
+    background = "#000000",
+    cursor_bg = "#bcbcbc",
+    cursor_fg = "#000000",
+    cursor_border = "#bcbcbc",
+    selection_fg = "#000000",
+    selection_bg = "#a0a0a0",
+    scrollbar_thumb = "#333333",
+    split = "#333333",
+    ansi = {
+        '#0A0A0A', -- black
+        '#B39393', -- maroon
+        '#93B393', -- green
+        '#93A393', -- olive
+        '#9393B3', -- navy
+        '#9393A3', -- purple
+        '#9393C3', -- teal
+        '#AAAAAA', -- silver
+    },
+    brights = {
+        '#2E2E2E', -- grey
+        '#C39393', -- red
+        '#93C393', -- lime
+        '#B3B393', -- yellow
+        '#B3B3C3', -- blue
+        '#93B3B3', -- fuchsia
+        '#B3C3B3', -- aqua
+        '#CCCCCC', -- white
+    },
 }
 
 -- Use standard tab bar at bottom
