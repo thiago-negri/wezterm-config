@@ -72,7 +72,7 @@ config.colors = {
     scrollbar_thumb = "#333333",
     split = "#333333",
     ansi = {
-        '#0A0A0A', -- black
+        '#444444', -- black
         '#B39393', -- red
         '#93B393', -- green
         '#B3B393', -- yellow
@@ -82,7 +82,7 @@ config.colors = {
         '#B3B3B3', -- white
     },
     brights = {
-        '#0A0A0A', -- black
+        '#555555', -- black
         '#C39393', -- red
         '#93C393', -- green
         '#C3C393', -- yellow
