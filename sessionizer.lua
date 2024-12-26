@@ -29,6 +29,8 @@ else
     -- macOS search paths:
     "/Users/thiago.negri/projects",
     "/Users/thiago.negri/.config",
+    "/Users/thiago.negri/.vim/pack/downloads/opt",
+    "/Users/thiago.negri/.vim/pack/downloads/start",
     --
     "-maxdepth", "2",
     "-mindepth", "0",
@@ -80,3 +82,4 @@ M.toggle = function(window, pane)
 end
 
 return M
+
