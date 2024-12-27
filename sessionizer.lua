@@ -16,6 +16,8 @@ if isWindows then
     "c:\\Projetos",
     "c:\\Users\\Thiago\\AppData\\Local\\nvim",
     "c:\\Users\\Thiago\\.config",
+    "c:\\msys64\\home\\Thiago\\.vim\\pack\\downloads\\opt",
+    "c:\\msys64\\home\\Thiago\\.vim\\pack\\downloads\\start",
     --
     "-maxdepth", "3",
     "-mindepth", "1",
