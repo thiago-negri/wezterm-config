@@ -155,6 +155,7 @@ config.keys = {
     -- Split tab, VS
     { key = "v", mods = leader, action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
     { key = "s", mods = leader, action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+    { key = "t", mods = leader, action = act.SplitPane({ direction = "Down", size = { Cells = 10 } }) },
 
     -- Close pane, Q
     { key = "q", mods = leader, action = act.CloseCurrentPane({ confirm = false }) },
