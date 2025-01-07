@@ -43,12 +43,12 @@ config.window_decorations = "RESIZE"
 wezterm.on("gui-startup", function(cmd)
     local _, _, window = mux.spawn_window(cmd or {})
     if isWindows then
-        window:gui_window():set_position(500, 10)
+        window:gui_window():set_position(1340, 10)
     else
         window:gui_window():maximize()
     end
 end)
-config.initial_cols = 125
+config.initial_cols = 99
 config.initial_rows = 57
 
 config.font = wezterm.font("Comic Code")
@@ -107,7 +107,7 @@ config.keys = {
     -- Sessionizer / Workspaces
     { key = "f", mods = leader, action = wezterm.action_callback(sessionizer.toggle) },
     { key = "q", mods = leader, action = act.SwitchToWorkspace { name = 'default' } },
-    { key = "w", mods = leader, action = wezterm.action_callback(function (win, pane) 
+    { key = "w", mods = leader, action = wezterm.action_callback(function (win, pane)
         win:perform_action(
             act.SwitchToWorkspace({ name = "projects", spawn = { cwd = "C:\\Projetos" } }),
             pane
