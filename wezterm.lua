@@ -56,7 +56,7 @@ if isWindows then
    config.initial_cols = 125
    config.initial_rows = 67
 else
-   config.font_size = 14
+   config.font_size = 16
 end
 
 -- Colorscheme
