@@ -55,7 +55,7 @@ config.font = wezterm.font("Comic Code")
 
 -- My Windows monitor is way bigger :)
 if isWindows then
-   config.font_size = 14
+   config.font_size = 12
 else
    config.font_size = 18
 end
