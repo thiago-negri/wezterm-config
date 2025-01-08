@@ -43,21 +43,20 @@ config.window_decorations = "RESIZE"
 wezterm.on("gui-startup", function(cmd)
     local _, _, window = mux.spawn_window(cmd or {})
     if isWindows then
-        window:gui_window():set_position(1340, 10)
+        window:gui_window():set_position(1285, 0)
     else
         window:gui_window():maximize()
     end
 end)
-config.initial_cols = 99
-config.initial_rows = 57
-
 config.font = wezterm.font("Comic Code")
 
 -- My Windows monitor is way bigger :)
 if isWindows then
    config.font_size = 12
+   config.initial_cols = 125
+   config.initial_rows = 67
 else
-   config.font_size = 18
+   config.font_size = 14
 end
 
 -- Colorscheme
