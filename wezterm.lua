@@ -4,7 +4,9 @@ local sessionizer = require("sessionizer")
 local mux = wezterm.mux
 local config = wezterm.config_builder()
 local act = wezterm.action
+
 local isWindows = wezterm.target_triple == "x86_64-pc-windows-msvc"
+local isMac = wezterm.target_triple == "x86_64-apple-darwin"
 
 -- Use ZSH
 if isWindows then
@@ -19,12 +21,10 @@ if isWindows then
         "-no-start",
         "-mingw64",
         "-shell",
-        -- "fish",
         "zsh",
     }
 else
-    -- config.default_prog = { "/usr/local/bin/fish" }
-    config.default_prog = { "zsh" }
+    config.default_prog = { "/usr/bin/zsh" }
 end
 
 -- Show workspace name at left bottom
@@ -38,25 +38,26 @@ config.show_tab_index_in_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = true
 
 -- Hide window manager title bar with resize/close buttons
-config.window_decorations = "RESIZE"
+config.window_decorations = "NONE"
+
 -- Maximize on start
 wezterm.on("gui-startup", function(cmd)
     local _, _, window = mux.spawn_window(cmd or {})
-    if isWindows then
-        window:gui_window():set_position(1285, 0)
-    else
+    if isMac then
         window:gui_window():maximize()
+    else
+        window:gui_window():set_position(1285, 0)
     end
 end)
+
 config.font = wezterm.font("Comic Code")
 
--- My Windows monitor is way bigger :)
-if isWindows then
-   config.font_size = 12
-   config.initial_cols = 125
-   config.initial_rows = 67
+if isMac then
+    config.font_size = 16
 else
-   config.font_size = 16
+    config.font_size = 12
+    config.initial_cols = 125
+    config.initial_rows = 67
 end
 
 -- Colorscheme
@@ -71,24 +72,24 @@ config.colors = {
     scrollbar_thumb = "#333333",
     split = "#333333",
     ansi = {
-        '#444444', -- black
-        '#B39393', -- red
-        '#93B393', -- green
-        '#B3B393', -- yellow
-        '#9393B3', -- blue
-        '#B393B3', -- magenta
-        '#93B3B3', -- cyan
-        '#B3B3B3', -- white
+        "#444444", -- black
+        "#B39393", -- red
+        "#93B393", -- green
+        "#B3B393", -- yellow
+        "#9393B3", -- blue
+        "#B393B3", -- magenta
+        "#93B3B3", -- cyan
+        "#B3B3B3", -- white
     },
     brights = {
-        '#555555', -- black
-        '#C39393', -- red
-        '#93C393', -- green
-        '#C3C393', -- yellow
-        '#9393C3', -- blue
-        '#C393C3', -- magenta
-        '#93C3C3', -- cyan
-        '#C3C3C3', -- white
+        "#555555", -- black
+        "#C39393", -- red
+        "#93C393", -- green
+        "#C3C393", -- yellow
+        "#9393C3", -- blue
+        "#C393C3", -- magenta
+        "#93C3C3", -- cyan
+        "#C3C3C3", -- white
     },
 }
 
@@ -101,18 +102,26 @@ config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 2000 }
 
 local leader = "LEADER"
 
+local project_root = "/home/tnegri/projects"
+if isWindows then
+    project_root = "C:\\Projetos"
+elseif isMac then
+    project_root = "/Users/thiago.negri/projects"
+end
+
 -- Keybindings
 config.keys = {
     -- Sessionizer / Workspaces
     { key = "f", mods = leader, action = wezterm.action_callback(sessionizer.toggle) },
-    { key = "q", mods = leader, action = act.SwitchToWorkspace { name = 'default' } },
-    { key = "w", mods = leader, action = wezterm.action_callback(function (win, pane)
-        win:perform_action(
-            act.SwitchToWorkspace({ name = "projects", spawn = { cwd = "C:\\Projetos" } }),
-            pane
-        )
-    end) },
-    { key = "e", mods = leader, action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
+    { key = "q", mods = leader, action = act.SwitchToWorkspace({ name = "default" }) },
+    {
+        key = "w",
+        mods = leader,
+        action = wezterm.action_callback(function(win, pane)
+            win:perform_action(act.SwitchToWorkspace({ name = "projects", spawn = { cwd = project_root } }), pane)
+        end),
+    },
+    { key = "e", mods = leader, action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
 
     -- Move between panes, HJKL
     { key = "h", mods = leader, action = act.ActivatePaneDirection("Left") },
@@ -163,10 +172,10 @@ config.keys = {
     { key = "'", mods = leader, action = act.ActivateCopyMode },
 
     -- Toggle window decoration, m
-    { key = "m", mods = leader, action = act.EmitEvent "toggle-window-decoration" },
+    { key = "m", mods = leader, action = act.EmitEvent("toggle-window-decoration") },
 
     -- Toggle font, ;
-    { key = ";", mods = leader, action = act.EmitEvent "toggle-window-font" },
+    { key = ";", mods = leader, action = act.EmitEvent("toggle-window-font") },
 
     -- Rename tab, R
     {
@@ -183,11 +192,11 @@ config.keys = {
     },
 }
 
-wezterm.on('toggle-window-maximize', function(window, pane)
+wezterm.on("toggle-window-maximize", function(window)
     window:toggle_fullscreen()
 end)
 
-wezterm.on('toggle-window-font', function(window, pane)
+wezterm.on("toggle-window-font", function(window)
     local overrides = window:get_config_overrides() or {}
     if not overrides.font then
         overrides.font = wezterm.font("CommitMono Nerd Font")
@@ -197,7 +206,7 @@ wezterm.on('toggle-window-font', function(window, pane)
     window:set_config_overrides(overrides)
 end)
 
-wezterm.on('toggle-window-decoration', function(window, pane)
+wezterm.on("toggle-window-decoration", function(window)
     local overrides = window:get_config_overrides() or {}
     if not overrides.window_decorations then
         overrides.window_decorations = "TITLE | RESIZE"
@@ -208,4 +217,3 @@ wezterm.on('toggle-window-decoration', function(window, pane)
 end)
 
 return config
-
