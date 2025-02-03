@@ -23,6 +23,8 @@ if isWindows then
         "-shell",
         "zsh",
     }
+elseif isMac then
+    config.default_prog = { "/bin/zsh" }
 else
     config.default_prog = { "/usr/bin/zsh" }
 end
