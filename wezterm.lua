@@ -64,11 +64,11 @@ end
 
 -- Colorscheme
 config.colors = {
-    foreground = "#bcbcbc",
-    background = "#000000",
+    foreground = "#b0b0b0",
+    background = "#1a1a1a",
     cursor_bg = "#bcbcbc",
     cursor_fg = "#000000",
-    cursor_border = "#bcbcbc",
+    cursor_border = "#b0b0b0",
     selection_fg = "#000000",
     selection_bg = "#5f5f5f",
     scrollbar_thumb = "#333333",
