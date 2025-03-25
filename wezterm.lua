@@ -40,15 +40,22 @@ config.show_tab_index_in_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = true
 
 -- Hide window manager title bar with resize/close buttons
-config.window_decorations = "NONE"
+-- https://wezterm.org/config/lua/config/window_decorations.html?h=window_decorations
+config.window_decorations = "RESIZE"
 
--- Maximize on start
-wezterm.on("gui-startup", function(cmd)
-    local _, _, window = mux.spawn_window(cmd or {})
-    if isMac then
-        window:gui_window():maximize()
-    else
-        window:gui_window():set_position(1285, 0)
+-- -- Maximize on start
+-- wezterm.on("gui-startup", function(cmd)
+--     local _, _, window = mux.spawn_window(cmd or {})
+--     window:gui_window():maximize()
+-- end)
+--
+wezterm.on("gui-attached", function()
+    -- maximize all displayed windows on startup
+    local workspace = mux.get_active_workspace()
+    for _, window in ipairs(mux.all_windows()) do
+        if window:get_workspace() == workspace then
+            window:gui_window():maximize()
+        end
     end
 end)
 
@@ -57,15 +64,13 @@ config.font = wezterm.font("Comic Code")
 if isMac then
     config.font_size = 16
 else
-    config.font_size = 12
-    config.initial_cols = 125
-    config.initial_rows = 67
+    config.font_size = 14
 end
 
 -- Colorscheme
 config.colors = {
     foreground = "#b0b0b0",
-    background = "#1a1a1a",
+    background = "#101010",
     cursor_bg = "#bcbcbc",
     cursor_fg = "#000000",
     cursor_border = "#b0b0b0",
