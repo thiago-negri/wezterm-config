@@ -53,7 +53,8 @@ else
     cmd = {
         "find",
         -- Linux search paths:
-        "/home/tnegri/projects",
+        "/home/hunz/projects",
+        "/home/hunz/.config",
         --
         "-maxdepth",
         "2",
