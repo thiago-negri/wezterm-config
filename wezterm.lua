@@ -109,7 +109,7 @@ config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 2000 }
 
 local leader = "LEADER"
 
-local project_root = "/home/tnegri/projects"
+local project_root = "/home/hunz/projects"
 if isWindows then
     project_root = "C:\\Projetos"
 elseif isMac then
