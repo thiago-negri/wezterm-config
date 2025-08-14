@@ -7,6 +7,7 @@ local act = wezterm.action
 
 local isWindows = wezterm.target_triple == "x86_64-pc-windows-msvc"
 local isMac = wezterm.target_triple == "x86_64-apple-darwin"
+local hideTab = true
 
 -- Use ZSH
 if isWindows then
@@ -25,6 +26,8 @@ if isWindows then
     }
 elseif isMac then
     config.default_prog = { "/bin/zsh" }
+    -- rarely I work on a single project while on the mac, so having the bar all time is easier
+    hideTab = false
 else
     config.default_prog = { "/usr/bin/zsh" }
 end
@@ -37,7 +40,7 @@ end)
 config.max_fps = 200
 config.tab_max_width = 4
 config.show_tab_index_in_tab_bar = true
-config.hide_tab_bar_if_only_one_tab = true
+config.hide_tab_bar_if_only_one_tab = hideTab
 
 -- Hide window manager title bar with resize/close buttons
 -- https://wezterm.org/config/lua/config/window_decorations.html?h=window_decorations
