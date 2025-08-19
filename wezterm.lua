@@ -8,6 +8,7 @@ local act = wezterm.action
 local isWindows = wezterm.target_triple == "x86_64-pc-windows-msvc"
 local isMac = wezterm.target_triple == "x86_64-apple-darwin"
 local hideTab = true
+local backgroundColor = "#060606"
 
 -- Use ZSH
 if isWindows then
@@ -28,6 +29,8 @@ elseif isMac then
     config.default_prog = { "/bin/zsh" }
     -- rarely I work on a single project while on the mac, so having the bar all time is easier
     hideTab = false
+    -- The monitor I use for the Mac is darker, so a brighter background is preferred
+    backgroundColor = "#101010"
 else
     config.default_prog = { "/usr/bin/zsh" }
 end
@@ -73,7 +76,7 @@ end
 -- Colorscheme
 config.colors = {
     foreground = "#c0c0c0",
-    background = "#101010",
+    background = backgroundColor,
     cursor_bg = "#cccccc",
     cursor_fg = "#000000",
     cursor_border = "#d0d0d0",
