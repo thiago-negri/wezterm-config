@@ -72,34 +72,34 @@ end
 
 -- Colorscheme
 config.colors = {
-    foreground = "#b0b0b0",
+    foreground = "#c0c0c0",
     background = "#101010",
-    cursor_bg = "#bcbcbc",
+    cursor_bg = "#cccccc",
     cursor_fg = "#000000",
-    cursor_border = "#b0b0b0",
+    cursor_border = "#d0d0d0",
     selection_fg = "#000000",
-    selection_bg = "#5f5f5f",
-    scrollbar_thumb = "#333333",
-    split = "#333333",
+    selection_bg = "#6f6f6f",
+    scrollbar_thumb = "#434343",
+    split = "#434343",
     ansi = {
         "#444444", -- black
-        "#B39393", -- red
-        "#93B393", -- green
-        "#B3B393", -- yellow
-        "#9393B3", -- blue
-        "#B393B3", -- magenta
-        "#93B3B3", -- cyan
-        "#B3B3B3", -- white
+        "#C3A3A3", -- red
+        "#A3C3A3", -- green
+        "#C3C3A3", -- yellow
+        "#A3A3C3", -- blue
+        "#C3A3C3", -- magenta
+        "#A3C3C3", -- cyan
+        "#C3C3C3", -- white
     },
     brights = {
         "#555555", -- black
-        "#C39393", -- red
-        "#93C393", -- green
-        "#C3C393", -- yellow
-        "#9393C3", -- blue
-        "#C393C3", -- magenta
-        "#93C3C3", -- cyan
-        "#C3C3C3", -- white
+        "#D3A3A3", -- red
+        "#A3D3A3", -- green
+        "#D3D3A3", -- yellow
+        "#A3A3D3", -- blue
+        "#D3A3D3", -- magenta
+        "#A3D3D3", -- cyan
+        "#D3D3D3", -- white
     },
 }
 
