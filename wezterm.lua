@@ -68,9 +68,9 @@ end)
 config.font = wezterm.font("Comic Code")
 
 if isMac then
-    config.font_size = 16
+    config.font_size = 18
 else
-    config.font_size = 14
+    config.font_size = 18
 end
 
 -- Colorscheme
