@@ -173,6 +173,15 @@ config.keys = {
     -- New tab, N
     { key = "n", mods = leader, action = act.SpawnTab("CurrentPaneDomain") },
 
+    -- Move current pane to a new tab, SHIFT-N
+    {
+        key = "N",
+        mods = leader,
+        action = wezterm.action_callback(function(_, pane)
+            pane:move_to_new_tab()
+        end),
+    },
+
     -- Split tab, VS
     { key = "v", mods = leader, action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
     { key = "s", mods = leader, action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
@@ -183,9 +192,6 @@ config.keys = {
 
     -- Enter VI mode, '
     { key = "'", mods = leader, action = act.ActivateCopyMode },
-
-    -- Toggle window decoration, m
-    { key = "m", mods = leader, action = act.EmitEvent("toggle-window-decoration") },
 
     -- Toggle font, ;
     { key = ";", mods = leader, action = act.EmitEvent("toggle-window-font") },
