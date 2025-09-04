@@ -73,38 +73,40 @@ else
     config.font_size = 12
 end
 
--- Colorscheme
-config.colors = {
-    foreground = "#c0c0c0",
-    background = backgroundColor,
-    cursor_bg = "#cccccc",
-    cursor_fg = "#000000",
-    cursor_border = "#d0d0d0",
-    selection_fg = "#000000",
-    selection_bg = "#6f6f6f",
-    scrollbar_thumb = "#434343",
-    split = "#434343",
-    ansi = {
-        "#444444", -- black
-        "#C3A3A3", -- red
-        "#A3C3A3", -- green
-        "#C3C3A3", -- yellow
-        "#A3A3C3", -- blue
-        "#C3A3C3", -- magenta
-        "#A3C3C3", -- cyan
-        "#C3C3C3", -- white
-    },
-    brights = {
-        "#555555", -- black
-        "#D3A3A3", -- red
-        "#A3D3A3", -- green
-        "#D3D3A3", -- yellow
-        "#A3A3D3", -- blue
-        "#D3A3D3", -- magenta
-        "#A3D3D3", -- cyan
-        "#D3D3D3", -- white
-    },
-}
+-- -- Colorscheme
+-- config.colors = {
+--     foreground = "#c0c0c0",
+--     background = backgroundColor,
+--     cursor_bg = "#cccccc",
+--     cursor_fg = "#000000",
+--     cursor_border = "#d0d0d0",
+--     selection_fg = "#000000",
+--     selection_bg = "#6f6f6f",
+--     scrollbar_thumb = "#434343",
+--     split = "#434343",
+--     ansi = {
+--         "#444444", -- black
+--         "#C3A3A3", -- red
+--         "#A3C3A3", -- green
+--         "#C3C3A3", -- yellow
+--         "#A3A3C3", -- blue
+--         "#C3A3C3", -- magenta
+--         "#A3C3C3", -- cyan
+--         "#C3C3C3", -- white
+--     },
+--     brights = {
+--         "#555555", -- black
+--         "#D3A3A3", -- red
+--         "#A3D3A3", -- green
+--         "#D3D3A3", -- yellow
+--         "#A3A3D3", -- blue
+--         "#D3A3D3", -- magenta
+--         "#A3D3D3", -- cyan
+--         "#D3D3D3", -- white
+--     },
+-- }
+--
+config.color_scheme = 'nord'
 
 -- Use standard tab bar at bottom
 config.use_fancy_tab_bar = false
