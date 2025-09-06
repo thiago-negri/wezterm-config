@@ -56,13 +56,14 @@ else
     cmd_git = {
         "find",
         -- Linux search paths:
+        "/home/hunz/.gg",
         "/home/hunz/projects",
         "/home/hunz/.config",
         --
         "-maxdepth",
         "2",
         "-mindepth",
-        "2",
+        "1",
         "-type",
         "d",
         "-name",
