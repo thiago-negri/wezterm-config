@@ -38,6 +38,7 @@ elseif isMac then
         -- macOS search paths:
         "/Users/thiago.negri/projects",
         "/Users/thiago.negri/.config",
+        "/Users/thiago.negri/.gg",
         "/Users/thiago.negri/.vim/pack/downloads/opt",
         "/Users/thiago.negri/.vim/pack/downloads/start",
         --
