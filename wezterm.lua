@@ -115,6 +115,7 @@ config.tab_bar_at_bottom = true
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 2000 }
 
 local leader = "LEADER"
+local leader_ctrl = "LEADER|CTRL"
 
 local project_root = "/home/hunz/projects"
 if isWindows then
@@ -142,6 +143,11 @@ config.keys = {
     { key = "j", mods = leader, action = act.ActivatePaneDirection("Down") },
     { key = "k", mods = leader, action = act.ActivatePaneDirection("Up") },
     { key = "l", mods = leader, action = act.ActivatePaneDirection("Right") },
+    { key = "h", mods = leader_ctrl, action = act.ActivatePaneDirection("Left") },
+    { key = "j", mods = leader_ctrl, action = act.ActivatePaneDirection("Down") },
+    { key = "k", mods = leader_ctrl, action = act.ActivatePaneDirection("Up") },
+    { key = "l", mods = leader_ctrl, action = act.ActivatePaneDirection("Right") },
+
 
     -- Resize panes, <>TS
     { key = "<", mods = leader, action = act.AdjustPaneSize({ "Left", 5 }) },
