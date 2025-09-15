@@ -9,6 +9,8 @@ local isWindows = wezterm.target_triple == "x86_64-pc-windows-msvc"
 local isMac = wezterm.target_triple == "x86_64-apple-darwin"
 local hideTab = true
 local backgroundColor = "#060606"
+local font_size_mac = 18
+local font_size = 14
 
 -- Use ZSH
 if isWindows then
@@ -68,9 +70,9 @@ end)
 config.font = wezterm.font("Comic Code")
 
 if isMac then
-    config.font_size = 18
+    config.font_size = font_size_mac
 else
-    config.font_size = 14
+    config.font_size = font_size
 end
 
 -- Colorscheme
@@ -115,6 +117,7 @@ config.tab_bar_at_bottom = true
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 2000 }
 
 local leader = "LEADER"
+local ctrl = "CTRL"
 local leader_ctrl = "LEADER|CTRL"
 
 local project_root = "/home/hunz/projects"
@@ -148,7 +151,6 @@ config.keys = {
     { key = "k", mods = leader_ctrl, action = act.ActivatePaneDirection("Up") },
     { key = "l", mods = leader_ctrl, action = act.ActivatePaneDirection("Right") },
 
-
     -- Resize panes, <>TS
     { key = "<", mods = leader, action = act.AdjustPaneSize({ "Left", 5 }) },
     { key = ">", mods = leader, action = act.AdjustPaneSize({ "Right", 5 }) },
@@ -156,8 +158,8 @@ config.keys = {
     { key = "S", mods = leader, action = act.AdjustPaneSize({ "Down", 5 }) },
 
     -- Zoom in/out (change font size), -=
-    { key = "=", mods = leader, action = act.IncreaseFontSize },
-    { key = "-", mods = leader, action = act.DecreaseFontSize },
+    { key = "=", mods = ctrl, action = act.IncreaseFontSize },
+    { key = "-", mods = ctrl, action = act.DecreaseFontSize },
 
     -- Maximize a pane, M
     { key = "m", mods = leader, action = act.TogglePaneZoomState },
@@ -179,6 +181,7 @@ config.keys = {
 
     -- New tab, N
     { key = "n", mods = leader, action = act.SpawnTab("CurrentPaneDomain") },
+    { key = "n", mods = leader_ctrl, action = act.SpawnTab("CurrentPaneDomain") },
 
     -- Move current pane to a new tab, SHIFT-N
     {
@@ -199,37 +202,10 @@ config.keys = {
 
     -- Enter VI mode, '
     { key = "'", mods = leader, action = act.ActivateCopyMode },
-
-    -- Toggle font, ;
-    { key = ";", mods = leader, action = act.EmitEvent("toggle-window-font") },
-
-    -- Rename tab, R
-    {
-        key = "r",
-        mods = leader,
-        action = act.PromptInputLine({
-            description = "Enter new name for tab",
-            action = wezterm.action_callback(function(window, _, line)
-                if line then
-                    window:active_tab():set_title(line)
-                end
-            end),
-        }),
-    },
 }
 
 wezterm.on("toggle-window-maximize", function(window)
     window:toggle_fullscreen()
-end)
-
-wezterm.on("toggle-window-font", function(window)
-    local overrides = window:get_config_overrides() or {}
-    if not overrides.font then
-        overrides.font = wezterm.font("CommitMono Nerd Font")
-    else
-        overrides.font = nil
-    end
-    window:set_config_overrides(overrides)
 end)
 
 wezterm.on("toggle-window-decoration", function(window)
