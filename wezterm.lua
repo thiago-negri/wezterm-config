@@ -192,6 +192,9 @@ config.keys = {
         end),
     },
 
+    -- Toggle font, ;
+    { key = ";", mods = leader, action = act.EmitEvent("toggle-window-font") },
+
     -- Split tab, VS
     { key = "v", mods = leader, action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
     { key = "s", mods = leader, action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
@@ -206,6 +209,16 @@ config.keys = {
 
 wezterm.on("toggle-window-maximize", function(window)
     window:toggle_fullscreen()
+end)
+
+wezterm.on("toggle-window-font", function(window)
+    local overrides = window:get_config_overrides() or {}
+    if not overrides.font then
+        overrides.font = wezterm.font("CommitMono")
+    else
+        overrides.font = nil
+    end
+    window:set_config_overrides(overrides)
 end)
 
 wezterm.on("toggle-window-decoration", function(window)
