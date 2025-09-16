@@ -36,7 +36,10 @@ elseif isMac then
     cmd_git = {
         "find",
         -- macOS search paths:
-        "/Users/thiago.negri/projects",
+        "/Users/thiago.negri/projects/bc",
+        "/Users/thiago.negri/projects/ehg",
+        "/Users/thiago.negri/projects/tnegri",
+        "/Users/thiago.negri/projects/other",
         "/Users/thiago.negri/.config",
         "/Users/thiago.negri/.gg",
         "/Users/thiago.negri/.vim/pack/downloads/opt",
